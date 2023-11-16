@@ -1,6 +1,10 @@
 <template>
-    <router-view></router-view>
+    <h1>Dashboard</h1>
 </template>
 
 <script setup>
 </script>
+
+<style>
+
+</style>
