@@ -1,10 +1,26 @@
 <template>
-    <form class="flex flex-col items-center justify-center">
+    <form @submit="register" class="flex flex-col items-center justify-center">
         <h1 class="text-3xl text-white">Register</h1>
         <p class="mt-5 text-base text-gray-500 w-[80%] text-center">Please enter your email address, your password and password confirmation</p>
+
+        <!-- Fullname -->
+        <div class="mt-5 w-[80%] flex justify-center relative">
+            <input
+                v-model="user.name"
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Fullname"
+                autocomplete="off"
+                class="w-full px-4 py-2 text-gray-300 bg-transparent border-2 border-blue-500 rounded-full ring-0 focus:ring-0"
+            />
+        </div>
+        <!-- /Fullname -->
+
         <!-- Email input -->
         <div class="mt-5 w-[80%] flex justify-center relative">
             <input
+                v-model="user.email"
                 id="email"
                 name="email"
                 type="email"
@@ -18,6 +34,7 @@
         <!-- Password input -->
         <div class="mt-5 w-[80%] flex justify-center relative">
             <input
+                v-model="user.password"
                 id="password"
                 name="password"
                 :type="isPasswordShow ? 'text' : 'password'"
@@ -49,6 +66,7 @@
         <!-- Password confirmation input -->
         <div class="mt-5 w-[80%] flex justify-center relative">
             <input
+                v-model="user.password_confirmation"
                 id="password_confirmation"
                 name="password_confirmation"
                 :type="isPasswordComfirmShow ? 'text' : 'password'"
@@ -126,6 +144,29 @@
 
 <script setup>
     import { ref } from 'vue'
+    import { useRouter } from 'vue-router'
+    import store from '../store'
+
     const isPasswordShow = ref(false)
     const isPasswordComfirmShow = ref(false)
+
+    const router = useRouter()
+    const user = {
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: '',
+    }
+
+    function register(ev) {
+        ev.preventDefault()
+        store
+            .dispatch('register', user)
+            .then(() => {
+                router.push({ name: 'Dashboard' })
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
 </script>

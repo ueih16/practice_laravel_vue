@@ -1,10 +1,13 @@
 import './style.css'
 import { createApp } from 'vue'
-import store from './store/index.js'
-import router from './router/index.js'
+import store from './store'
+import router from './router'
 import App from './App.vue'
 
+import cors from 'cors'
+
 createApp(App)
+    .use(cors)
     .use(store)
     .use(router)
     .mount('#app')

@@ -5,7 +5,7 @@ import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Dashboard from '../views/Dashboard.vue'
 
-import store from '../store/index.js'
+import store from '../store'
 
 const routes = [
     {
